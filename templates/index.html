@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500&display=swap">
+		<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	</head>
+	<body>
+		<div class="index-main">
+			<input type="checkbox" id="check" aria-hidden="true">
+			
+			<div class="signup">
+				<form action="register" method="POST">
+					<label for="check" aria-hidden="true">
+						Sign Up
+					</label>		
+					<!-- <input type="text" name="username" id="username" placeholder="Username" required> -->
+					<input type="email" name="username" id="username" placeholder="E-mail" required>
+					<input type="password" name="password" placeholder="Password" required>
+					<button type="submit">
+						Register
+					</button>
+				</form>
+			</div>
+
+			<div class="login">
+				<form action="login" method="post">
+					<label for="check">
+						Login
+					</label>
+
+					<input type="text" name="username" placeholder="E-mail/Username" required>
+					<input type="password" name="password" placeholder="Password" required>
+					<button>
+						Login
+					</button>
+				</form>
+			</div>
+		</div>
+	</body>
+	<!-- <script>
+		function register() {
+			$.ajax({
+				type: "POST",
+				url: "{{ url_for('register') }}",
+				data: {
+					username: document.getElementById('username'), 
+					email: document.getElementById('email')
+				},
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+		}
+	</script> -->
+</html>

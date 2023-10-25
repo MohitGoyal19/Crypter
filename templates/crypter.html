@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500&display=swap">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	</head>
+	<body>
+		<div class="crypter-main">
+			<input type="checkbox" id="check" aria-hidden="true">
+			
+			<div class="text">
+				<form action="" method="post">
+					<label for="check" aria-hidden="true">
+						Crypt Text
+					</label>
+
+					<input type="textarea" name="key" placeholder="Crypter Key" required>			
+					<textarea name="text" cols="50" rows="10" required></textarea>
+					<label for="encrypt" class="crypt">
+						<i>
+							Encrypt
+						</i>
+						<input type="radio" name="crypt_type" value="encrypt" checked>
+					</label>
+					<label for="decrypt" class="crypt">
+						<i>
+							Decrypt
+						</i>
+						<input type="radio" name="crypt_type" value="decrypt">
+					</label>
+
+					<button>
+						Crypt
+					</button>
+				</form>
+			</div>
+
+			<div class="file">
+				<form action="" method="post">
+					<label for="check">
+						Crypt File
+					</label>
+
+					<input type="textarea" name="key" placeholder="Crypter Key" required>			
+					<input type="file" name="file" required>
+					<button>
+						Crypt
+					</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,187 @@
+body {
+	font-family: "Poppins", sans-serif;
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	display: flex;
+}
+
+.index-main {
+	width: 350px;
+	height: 500px;
+	background: crimson;
+	overflow: hidden;
+	background: url('https://www.itl.cat/pngfile/big/14-146530_3d-abstract-wallpapers-background-awesome-wallpapers-tech-wallpaper.jpg') center;
+	border-radius: 20px;
+	box-shadow: 5px 20px 50px #333;   
+}
+
+
+.crypter-main {
+	width: 500px;
+	height: 600px;
+	background: crimson;
+	overflow: hidden;
+	background: url('https://www.itl.cat/pngfile/big/14-146530_3d-abstract-wallpapers-background-awesome-wallpapers-tech-wallpaper.jpg') center;
+	border-radius: 20px;
+	box-shadow: 5px 20px 50px #333;   
+}
+
+
+#check {
+	display: none;
+}
+
+.signup {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.text {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+label[for="check"] {
+	color: #eee;
+	font-size: 1.8em;
+	justify-content: center;
+	display: flex;
+	margin: 40px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: .5s ease-in-out;
+}
+
+input {
+	width: 60%;
+	height: 28px;
+	background-color: #edd;
+	justify-content: center;
+	display: flex;
+	margin: 20px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+}
+
+
+textarea {
+	width: 60%;
+	height: 80px;
+	background-color: #edd;
+	justify-content: center;
+	display: flex;
+	margin: 20px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+}
+
+
+label.crypt {
+	width: 60%;
+	height: 28px;
+	color: #edd;
+	justify-content: center;
+	display: flex;
+	margin: 20px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;	
+}
+
+input[type="radio"] {
+	display: None;
+}
+
+
+button {
+	width: 60%;
+	height: 50px;
+	margin: 10px auto;
+	justify-content: center;
+	display: block;
+	color: #eee;
+	background-color: #573b8a;
+	font-size: 1em;
+	font-weight: bold;
+	margin-top: 20px;
+	outline: none;
+	border: none;
+	border-radius: 10px;
+	transition: .2s ease-in-out;
+	cursor: pointer;
+}
+
+button:hover {
+	background: #6d44b8;
+}
+
+
+#input[type="radio"]:checked {
+	font-weight: bold;
+}
+
+
+.login {
+	height: 450px;
+	background-color: #ddd;
+	border-radius: 50px;
+	transform: translateY(-180px);
+	transition: .8s ease-in-out;
+}
+
+.file {
+	height: 650px;
+	background-color: #ddd;
+	border-radius: 50px;
+	transform: translateY(-180px);
+	transition: .8s ease-in-out;
+}
+
+.login label[for="check"] {
+	color: #573b8a;
+	padding-top: 20px;
+	transform: scale(.6);
+}
+
+.file label[for="check"] {
+	color: #573b8a;
+	padding-top: 30px;
+	transform: scale(.6);
+}
+
+
+#check:checked ~ .login {
+	transform: translateY(-500px);
+}
+
+#check:checked ~ .login label[for="check"] {
+	transform: scale(1);
+}
+
+#check:checked ~ .signup label[for="check"] {
+	transform: scale(.6);
+}
+
+
+#check:checked ~ .file {
+	transform: translateY(-600px);
+}
+
+#check:checked ~ .file label[for="check"] {
+	transform: scale(1);
+}
+
+#check:checked ~ .text label[for="check"] {
+	transform: scale(.6);
+}
