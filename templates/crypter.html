@@ -3,23 +3,30 @@
 	<head>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500&display=swap">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	</head>
 	<body>
+		<script>
+			$('#text-form').resetForm();
+		</script>
 		<div class="crypter-main">
+			<button id="logout">
+				Logout
+			</button>
+
 			<input type="checkbox" id="check" aria-hidden="true">
 			
 			<div class="text">
-				<form action="" method="post">
+				<form id="text-form">
 					<label for="check" aria-hidden="true">
 						Crypt Text
 					</label>
 
-					<input type="textarea" name="key" placeholder="Crypter Key" required>			
-					<textarea name="text" cols="50" rows="10" required></textarea>
+					<input type="password" name="key" placeholder="Crypter Key" required>
+					<input type="password" name="confirm" placeholder="Confirm Key" required>			
+					<input type="text" name="text" placeholder="Text" required>
 					<label for="encrypt" class="crypt">
-						<i>
-							Encrypt
-						</i>
+						Encrypt
 						<input type="radio" name="crypt_type" value="encrypt" checked>
 					</label>
 					<label for="decrypt" class="crypt">
@@ -29,25 +36,90 @@
 						<input type="radio" name="crypt_type" value="decrypt">
 					</label>
 
-					<button>
+					<button type="submit">
 						Crypt
 					</button>
 				</form>
 			</div>
 
 			<div class="file">
-				<form action="" method="post">
+				<form id="file-form" action="crypt/file" method="POST" enctype="multipart/form-data">
 					<label for="check">
 						Crypt File
 					</label>
 
-					<input type="textarea" name="key" placeholder="Crypter Key" required>			
-					<input type="file" name="file" required>
-					<button>
+					<input type="file" name="file">
+					
+					<label for="encrypt" class="crypt">
+						Encrypt
+						<input type="radio" name="crypt_type" value="encrypt" checked>
+					</label>
+					<label for="decrypt" class="crypt">
+						<i>
+							Decrypt
+						</i>
+						<input type="radio" name="crypt_type" value="decrypt">
+					</label>
+
+					<button type="submit">
 						Crypt
 					</button>
 				</form>
-			</div>
+			</div>	
 		</div>
+		<script>
+			$('#text-form').submit(function(e){
+				e.preventDefault();
+				if (document.querySelector('#text-form input[name="key"]').value == document.querySelector('#text-form input[name="confirm"]').value){
+					$.ajax({
+						url: '/crypt/text',
+						type: 'POST',
+						data:$('#text-form').serialize(),
+						success:function(data){
+							alert(data.message);
+							$('#text-form').resetForm();
+						}
+					});
+
+					document.querySelector('#text-form input[name="text"]').value = '';
+
+				} else {
+					alert('Keys do not match');
+				}
+			});
+
+			$('#logout').click(function(e){
+				document.cookie = '';
+				window.location.href = '/';
+			});
+
+			// $('#file-form').submit(function(e){
+			// 	e.preventDefault();
+			// 	$.ajax({
+			// 		url: '/crypt/file',
+			// 		type: 'POST',
+			// 		headers: {
+			// 			'Content-Type': 'multipart/form-data'
+			// 		},
+			// 		data: $('#file-form').serialize(),
+			// 		// data: {
+			// 		// 	'key': $('#file-form')[0].key,
+			// 		// 	'file': $('#file-form')[0].file,
+			// 		// 	'crypt_type': $('#file-form')[0].crypt_type
+					
+			// 		// }, // The form with the file inputs.
+			// 		// fileInputs: $('input[type="file"]'),
+			// 		processData: false,
+			// 		contentType: false,
+			// 		success:function(data){
+			// 			// alert(data.message);
+
+			// 			// if (data.status == 200) {
+			// 			// 	window.location.href = '/crypter';
+			// 			// }
+			// 		}
+			// 	});	
+			// });
+		</script>
 	</body>
 </html>
