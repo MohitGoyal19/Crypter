@@ -17,7 +17,7 @@
 			<input type="checkbox" id="check" aria-hidden="true">
 			
 			<div class="text">
-				<form id="text-form">
+				<form id="text-form" action="crypt/text" method="POST" enctype="multipart/form-data">
 					<label for="check" aria-hidden="true">
 						Crypt Text
 					</label>
@@ -68,25 +68,25 @@
 			</div>	
 		</div>
 		<script>
-			$('#text-form').submit(function(e){
-				e.preventDefault();
-				if (document.querySelector('#text-form input[name="key"]').value == document.querySelector('#text-form input[name="confirm"]').value){
-					$.ajax({
-						url: '/crypt/text',
-						type: 'POST',
-						data:$('#text-form').serialize(),
-						success:function(data){
-							alert(data.message);
-							$('#text-form').resetForm();
-						}
-					});
+			// $('#text-form').submit(function(e){
+			// 	e.preventDefault();
+			// 	if (document.querySelector('#text-form input[name="key"]').value == document.querySelector('#text-form input[name="confirm"]').value){
+			// 		$.ajax({
+			// 			url: '/crypt/text',
+			// 			type: 'POST',
+			// 			data:$('#text-form').serialize(),
+			// 			success:function(data){
+			// 				alert(data.message);
+			// 				$('#text-form').resetForm();
+			// 			}
+			// 		});
 
-					document.querySelector('#text-form input[name="text"]').value = '';
+			// 		document.querySelector('#text-form input[name="text"]').value = '';
 
-				} else {
-					alert('Keys do not match');
-				}
-			});
+			// 	} else {
+			// 		alert('Keys do not match');
+			// 	}
+			// });
 
 			$('#logout').click(function(e){
 				document.cookie = '';

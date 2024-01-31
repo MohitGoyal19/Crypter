@@ -112,7 +112,8 @@ def encrypt(source, token, key, source_type='text'):
 		for x in range(0, len(data)):
 			data[x] = ascii_table_string[(ascii_table_string.index(data[x]) + ascii_table_string.index(token[x%len(token)])) % len(ascii_table_string)]
 
-		return matrix_to_string(data)
+		with open('uploads/encrypted file.txt', 'w') as f:
+			f.write(matrix_to_string(data))
 	
 	elif source_type == 'file':
 		with open(source, 'rb') as f:
@@ -167,7 +168,8 @@ def decrypt(source, token, key, source_type='text'):
 
 		data = matrix_to_list(matrix)
 		
-		return ''.join(data)[len(key):]
+		with open('uploads/decrypted file.txt', 'w') as f:
+			f.write(''.join(data)[len(key):])
 	
 	elif source_type == 'file':
 		with open(source, 'rb') as f:
@@ -282,19 +284,17 @@ def crypter():
 def crypt_text():
 	if verify_login(request):
 		if request.form['crypt_type'] == 'encrypt':
-			response = jsonify({
-				'status': 200,
-				'message': f"String encrypted successfully, encrypted string is: '{encrypt(request.form['text'], get_hash(request), request.form['key'])}'",
-			})
-			response.status_code = 200
+			encrypt(request.form['text'], get_hash(request), request.form['key'])
+			
+			return send_file('uploads/encrypted file.txt')
 
 		elif request.form['crypt_type'] == 'decrypt':
-			response = jsonify({
-				'status': 200,
-				'message': f"String decrypted successfully, decrypted string is: '{decrypt(request.form['text'], get_hash(request), request.form['key'])}'",
-			})
+			decrypt(request.form['text'], get_hash(request), request.form['key'])
 
-			response.status_code = 200
+			return send_file('uploads/decrypted file.txt')
+
+		elif request.form['crypt_type'] == 'decrypt':
+			return send_file('uploads/decrypted file.txt')
 
 		else:
 			response = jsonify({
