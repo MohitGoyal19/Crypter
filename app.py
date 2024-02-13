@@ -6,7 +6,7 @@ import os
 import pymongo
 from string import ascii_letters, digits
 import time
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
 
@@ -217,7 +217,7 @@ def login():
 		payload = request.form
 
 		if 'username' in payload and 'password' in payload:
-			if mongo['local']['user'].find_one({'username': payload['username'], 'password': generate_password_hash(payload['password'])}):
+			if mongo['local']['user'].find_one({'username': payload['username']}) and check_password_hash(mongo['local']['user'].find_one({'username': payload['username']})['password'], payload['password']):
 				response = jsonify({
 					'status': 200,
 					'message': 'User logged in successfully',
@@ -266,7 +266,11 @@ def register():
 			return response
 		
 		else:
-			response = jsonify('Invalid details for user registation, please try again')
+			response = jsonify({
+				'status': 403,
+				'message': 'Invalid details for user registation, please try again'
+			})
+
 			response.status_code = 403
 
 			return response
@@ -286,15 +290,12 @@ def crypt_text():
 		if request.form['crypt_type'] == 'encrypt':
 			encrypt(request.form['text'], get_hash(request), request.form['key'])
 			
-			return send_file('uploads/encrypted file.txt')
+			return send_file('uploads/encrypted file.txt', as_attachment=True)
 
 		elif request.form['crypt_type'] == 'decrypt':
 			decrypt(request.form['text'], get_hash(request), request.form['key'])
 
-			return send_file('uploads/decrypted file.txt')
-
-		elif request.form['crypt_type'] == 'decrypt':
-			return send_file('uploads/decrypted file.txt')
+			return send_file('uploads/decrypted file.txt', as_attachment=True)
 
 		else:
 			response = jsonify({
