@@ -1,8 +1,5 @@
 bcrypt
 flask
-Flask-Login
-Flask-WTF
 pyjwt
 pymongo
-python-dotenv
 werkzeug

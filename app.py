@@ -217,7 +217,7 @@ def login():
 		payload = request.form
 
 		if 'username' in payload and 'password' in payload:
-			if mongo['local']['user'].find_one({'username': payload['username']}):
+			if mongo['local']['user'].find_one({'username': payload['username'], 'password': generate_password_hash(payload['password'])}):
 				response = jsonify({
 					'status': 200,
 					'message': 'User logged in successfully',
@@ -229,11 +229,11 @@ def login():
 				return response
 			
 	response = jsonify({
-		'status': 406,
-		'message': 'A user with this username/e-mail already exists, please login'
+		'status': 401,
+		'message': 'Invalid username or password'
 	})
 
-	response.status_code = 406
+	response.status_code = 401
 
 	return response
 
