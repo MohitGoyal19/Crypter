@@ -60,6 +60,9 @@
 								window.location.href = '/crypter';
 								document.cookie = 'Authorization:' + data.token;
 							}
+						},
+						error:function(data) {
+							alert(data.message);
 						}
 					});
 				}
@@ -77,9 +80,10 @@
 						if (data.status == 200) {
 							window.location.href = '/crypter';
 							document.cookie = 'Authorization:' + data.token;
-						} else {
-							alert(data.message);
 						}
+					},
+					error:function(data) {
+						alert(data.message);
 					}
 				});
 			});	

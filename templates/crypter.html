@@ -68,32 +68,33 @@
 			</div>	
 		</div>
 		<script>
-			// $('#text-form').submit(function(e){
-			// 	e.preventDefault();
-			// 	if (document.querySelector('#text-form input[name="key"]').value == document.querySelector('#text-form input[name="confirm"]').value){
-			// 		$.ajax({
-			// 			url: '/crypt/text',
-			// 			type: 'POST',
-			// 			data:$('#text-form').serialize(),
-			// 			success:function(data){
-			// 				alert(data.message);
-			// 				$('#text-form').resetForm();
-			// 			}
-			// 		});
+			$('#text-form').submit(function(e){
+				e.preventDefault();
+				if (document.querySelector('#text-form input[name="key"]').value == document.querySelector('#text-form input[name="confirm"]').value){
+					$.ajax({
+						url: '/crypt/text',
+						type: 'POST',
+						data:$('#text-form').serialize(),
+						success:function(data){
+							alert(data.message);
+							$('#text-form').resetForm();
+						}
+					});
 
-			// 		document.querySelector('#text-form input[name="text"]').value = '';
+					document.querySelector('#text-form input[name="text"]').value = '';
 
-			// 	} else {
-			// 		alert('Keys do not match');
-			// 	}
-			// });
+				} else {
+					alert('Keys do not match');
+				}
+			});
 
 			
 			function submitForm() {
+				e.preventDefault();
+				if (document.querySelector('#text-form input[name="key"]').value != document.querySelector('#text-form input[name="confirm"]').value){
+					alert('Keys do not match');
+				}
 				// Get the first form with the name
-				// Usually the form name is not repeated
-				// but duplicate names are possible in HTML
-				// Therefore to work around the issue, enforce the correct index
 				var frm = document.querySelectorAll('#text-form')[0];
 				frm.submit(); // Submit the form
 				frm.reset();  // Reset all form data

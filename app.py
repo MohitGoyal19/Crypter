@@ -233,7 +233,7 @@ def login():
 		'message': 'Invalid username or password'
 	})
 
-	response.status_code = 401
+	response.status_code = 200
 
 	return response
 
@@ -250,7 +250,7 @@ def register():
 					'message': 'A user with this username/e-mail already exists, please login'
 				})
 
-				response.status_code = 406
+				response.status_code = 200
 
 				return response
 
@@ -261,7 +261,8 @@ def register():
 				'message': 'User created successfully',
 				'token': login_user({'username': payload['username'], 'password': generate_password_hash(payload['password'])})
 			})
-			# response = make_response(render_template('crypter.html'))
+
+			response.status_code = 200
 			
 			return response
 		
@@ -271,7 +272,7 @@ def register():
 				'message': 'Invalid details for user registation, please try again'
 			})
 
-			response.status_code = 403
+			response.status_code = 200
 
 			return response
 
