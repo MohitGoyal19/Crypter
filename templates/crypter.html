@@ -90,15 +90,15 @@
 
 			
 			function submitForm() {
-				e.preventDefault();
+				// e.preventDefault();
 				if (document.querySelector('#text-form input[name="key"]').value != document.querySelector('#text-form input[name="confirm"]').value){
 					alert('Keys do not match');
+				} else {
+					var frm = document.querySelector('#text-form');
+					frm.submit(); // Submit the form
+					frm.reset();  // Reset all form data
+					return false; // Prevent page refresh
 				}
-				// Get the first form with the name
-				var frm = document.querySelectorAll('#text-form')[0];
-				frm.submit(); // Submit the form
-				frm.reset();  // Reset all form data
-				return false; // Prevent page refresh
 			}
 
 			$('#logout').click(function(e){
