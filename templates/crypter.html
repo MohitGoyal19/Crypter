@@ -36,7 +36,7 @@
 						<input type="radio" name="crypt_type" value="decrypt">
 					</label>
 
-					<button type="submit" onsubmit="submitForm()">
+					<button type="submit" onclick="submitForm()">
 						Crypt
 					</button>
 				</form>
@@ -91,14 +91,19 @@
 			
 			function submitForm() {
 				// e.preventDefault();
-				if (document.querySelector('#text-form input[name="key"]').value != document.querySelector('#text-form input[name="confirm"]').value){
+				if (document.querySelector('#text-form input[name="key"]').value == '') {
+					alert('Key cannot be empty');
+				} else if (document.querySelector('#text-form input[name="key"]').value !== document.querySelector('#text-form input[name="confirm"]').value){
 					alert('Keys do not match');
+				} else if (document.querySelector('#text-form input[name="text"]').value == '') {
+					alert('Text cannot be empty');
 				} else {
 					var frm = document.querySelector('#text-form');
 					frm.submit(); // Submit the form
-					frm.reset();  // Reset all form data
-					return false; // Prevent page refresh
 				}
+
+				frm.reset();  // Reset all form data
+				return false; // Prevent page refresh
 			}
 
 			$('#logout').click(function(e){
