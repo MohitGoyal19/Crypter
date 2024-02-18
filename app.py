@@ -28,7 +28,7 @@ else:
 
 fernet = Fernet(fernet_key)
 
-ascii_table_string = list(ascii_letters + digits + ':$!')
+ascii_table_string = list(ascii_letters + digits + ':$! ')
 ascii_table_file = list(ascii_letters + digits)
 
 
